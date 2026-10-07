@@ -52,7 +52,7 @@
 
 <section id="connect" class="sec">
   <h2 data-i18n="connect_title">Connect Device</h2>
-  <p class="muted" data-i18n="connect_sub">There is no server, so connection data is exchanged manually.</p>
+  <p class="muted" data-i18n="connect_sub">Enter the 12-digit code or scan the QR. Only the small connection data passes through a free relay; files go directly between devices.</p>
   <div id="unsupported" class="alert" role="alert" hidden></div>
   <div class="glass pad">
     <div class="row" role="group">
@@ -61,26 +61,51 @@
     </div>
     <label class="check"><input type="checkbox" id="stun"> <span data-i18n="stun">Use a public STUN server (needed across different networks; it sees your IP)</span></label>
     <p class="state"><i class="dot state-dot" data-state="idle"></i><span class="state-text" aria-live="polite"></span></p>
+    <div id="verify" class="codebox" hidden>
+      <b data-i18n="v_title">Verify the connection</b>
+      <p id="sas" class="code" dir="ltr"></p>
+      <p class="muted small" data-i18n="v_help">The same 6 digits must appear on the other device. If they differ, someone may be intercepting: disconnect.</p>
+      <div class="row"><button class="btn primary" id="vOk" type="button" data-i18n="v_ok">They match</button><button class="btn ghost" id="vNo" type="button" data-i18n="v_no">They differ — disconnect</button></div>
+    </div>
 
     <div id="panelSend" class="panel">
       <button class="btn primary" id="createOffer" type="button" data-i18n="s_create">Create connection</button>
-      <label for="offerOut" data-i18n="s_offer">Offer — send this to the other device</label>
-      <textarea id="offerOut" readonly rows="4"></textarea>
-      <div class="row"><button class="btn ghost" id="copyOffer" type="button" data-i18n="copy">Copy</button><button class="btn ghost" id="shareOffer" type="button" data-i18n="share" hidden>Share</button></div>
-      <label for="answerIn" data-i18n="s_answer">Paste the Answer from the other device</label>
-      <textarea id="answerIn" rows="4" spellcheck="false"></textarea>
-      <button class="btn primary" id="acceptAnswer" type="button" data-i18n="s_connect">Connect</button>
+      <div id="codeBox" class="codebox" hidden>
+        <p class="muted small" data-i18n="code_label">Your connection code (single use)</p>
+        <p id="codeText" class="code" dir="ltr"></p>
+        <canvas id="qr" width="1" height="1" role="img" aria-label="QR"></canvas>
+        <p class="muted small" data-i18n="code_help">On the other device choose Receive Files, then type this code or scan the QR. It connects automatically.</p>
+      </div>
+      <details class="manual"><summary data-i18n="manual">Manual connection (no relay)</summary>
+        <label for="offerOut" data-i18n="s_offer">Offer — send this to the other device</label>
+        <textarea id="offerOut" readonly rows="4"></textarea>
+        <div class="row"><button class="btn ghost" id="copyOffer" type="button" data-i18n="copy">Copy</button><button class="btn ghost" id="shareOffer" type="button" data-i18n="share" hidden>Share</button></div>
+        <label for="answerIn" data-i18n="s_answer">Paste the Answer from the other device</label>
+        <textarea id="answerIn" rows="4" spellcheck="false"></textarea>
+        <button class="btn primary" id="acceptAnswer" type="button" data-i18n="s_connect">Connect</button>
+      </details>
     </div>
 
     <div id="panelRecv" class="panel" hidden>
-      <label for="offerIn" data-i18n="r_offer">Paste the Offer from the sender</label>
-      <textarea id="offerIn" rows="4" spellcheck="false"></textarea>
-      <button class="btn primary" id="createAnswer" type="button" data-i18n="r_create">Create answer</button>
-      <label for="answerOut" data-i18n="r_answer">Answer — send this back to the sender</label>
-      <textarea id="answerOut" readonly rows="4"></textarea>
-      <button class="btn ghost" id="copyAnswer" type="button" data-i18n="copy">Copy</button>
+      <label for="codeIn" data-i18n="r_code">Enter the 12-digit code</label>
+      <input id="codeIn" inputmode="numeric" maxlength="14" autocomplete="off" dir="ltr">
+      <button class="btn primary" id="joinBtn" type="button" data-i18n="r_join">Connect</button>
+      <details class="manual"><summary data-i18n="manual">Manual connection (no relay)</summary>
+        <label for="offerIn" data-i18n="r_offer">Paste the Offer from the sender</label>
+        <textarea id="offerIn" rows="4" spellcheck="false"></textarea>
+        <button class="btn primary" id="createAnswer" type="button" data-i18n="r_create">Create answer</button>
+        <label for="answerOut" data-i18n="r_answer">Answer — send this back to the sender</label>
+        <textarea id="answerOut" readonly rows="4"></textarea>
+        <button class="btn ghost" id="copyAnswer" type="button" data-i18n="copy">Copy</button>
+      </details>
     </div>
-    <p class="muted small" data-i18n="qr_note">QR code is unavailable: the connection data is too large for a reliable QR without an external library. Use Copy or Share instead.</p>
+    <details class="manual"><summary data-i18n="adv">Advanced: TURN relay (optional)</summary>
+      <p class="muted small" data-i18n="adv_help">Helps when a direct connection is impossible. Use your own TURN server; it relays encrypted data.</p>
+      <label for="turnUrl" data-i18n="turn_url">TURN URL (turn:host:3478)</label><input id="turnUrl" dir="ltr" autocomplete="off">
+      <label for="turnUser" data-i18n="turn_user">Username</label><input id="turnUser" dir="ltr" autocomplete="off">
+      <label for="turnPass" data-i18n="turn_pass">Credential</label><input id="turnPass" type="password" dir="ltr" autocomplete="off">
+    </details>
+    <p class="muted small" data-i18n="qr_note">The code and QR use the free public relay ntfy.sh for a few seconds. If it is unreachable, open Manual connection below.</p>
   </div>
 </section>
 
@@ -90,6 +115,10 @@
     <label class="drop" id="drop" for="picker"><b data-i18n="drop">Drop files here or tap to choose</b><span class="muted small" data-i18n="no_pause">Pause/resume is not available in this version.</span></label>
     <input type="file" id="picker" multiple hidden>
     <div class="row"><button class="btn primary" id="sendBtn" type="button" data-i18n="send_btn">Send queue</button></div>
+    <div id="request" class="active" hidden>
+      <p id="rText" class="name"></p>
+      <div class="row"><button class="btn primary" id="rAccept" type="button" data-i18n="accept">Accept</button><button class="btn ghost" id="rDecline" type="button" data-i18n="decline">Decline</button></div>
+    </div>
     <h3 data-i18n="queue_title">File transfer queue</h3>
     <ul class="list" id="queue"></ul>
     <div id="active" class="active" hidden>
