@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YASIR SHARE</title><link rel="stylesheet" href="style.css"></head><body>
+<header><h1>YASIR SHARE</h1><span id="status" class="pill" role="status">● Disconnected</span><button id="btnTheme" class="ghost" aria-label="Toggle light or dark theme"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 010 16z" fill="currentColor"/></svg></button><button id="btnSettings" class="ghost" aria-label="Settings"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg>Settings</button></header>
+<div id="compat" class="warn" hidden></div>
+<main>
+<section class="card" id="connCard"><h2>Connect</h2>
+<button id="btnCreate" class="primary">Create Session</button>
+<div id="sess" hidden><div class="qrwrap"><img id="qr" alt="QR code containing the connection link"></div>
+<p>Pairing code: <b id="code" class="code"></b> <button id="btnCopyCode" class="ghost">Copy</button></p>
+<input id="link" readonly aria-label="Connection link">
+<div class="row"><button id="btnCopy">Copy Link</button><button id="btnShare" hidden>Share</button></div>
+<p class="hint" id="sessHint"></p></div>
+<form id="joinForm" class="row"><input id="joinCode" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="9" placeholder="Code (8 characters)" aria-label="Pairing code"><button class="primary">Connect</button><button type="button" id="btnScan"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V6a2 2 0 012-2h2M16 4h2a2 2 0 012 2v2M20 16v2a2 2 0 01-2 2h-2M8 20H6a2 2 0 01-2-2v-2M4 12h16"/></svg>Scan QR</button></form>
+<p class="hint">Browsers cannot auto-discover devices on your network. Use QR, code or link.</p></section>
+<section class="card"><h2>Connected device</h2><p id="peer">No device connected.</p><p id="peerInfo" class="hint"></p><button id="btnDisc" class="ghost" hidden>Disconnect</button></section>
+<section id="sendCard" class="card off"><h2>Send</h2><p id="sendHint" class="hint">Connect a device first. Sending unlocks after the other device joins and the computer approves it.</p>
+<div id="drop" tabindex="0" role="button" aria-label="Select files to send">Drop files to send<br><small>or click to select</small></div>
+<div class="row big"><button id="btnFiles" class="primary"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L8 8m4-4l4 4M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3"/></svg>Send Files</button><button id="btnFolder"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Send Folder</button></div>
+<input id="fileIn" type="file" multiple hidden><input id="folderIn" type="file" webkitdirectory hidden>
+<textarea id="txt" rows="2" placeholder="Write something…" aria-label="Text to send"></textarea><div class="row big"><button id="btnText"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Send Text</button></div>
+<div class="row big"><input id="lnk" placeholder="Paste a link…" aria-label="Link to send"><button id="btnLink"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/></svg>Send Link</button></div></section>
+<section class="card wide"><h2>Transfers</h2><div id="transfers"><p id="noT" class="hint">No transfers yet.</p></div><div id="msgs"></div></section>
+<section class="card wide"><h2>History</h2>
+<div class="row"><input id="hq" type="search" placeholder="Search" aria-label="Search history"><select id="hf" aria-label="Filter history"><option value="all">All</option><option value="out">Sent</option><option value="in">Received</option><option value="Completed">Completed</option><option value="Failed">Failed</option><option value="Cancelled">Cancelled</option></select></div>
+<ul id="hist"></ul><button id="btnClear" class="ghost">Clear History</button></section>
+</main>
+<div id="toasts" aria-live="polite"></div>
+<dialog id="dlg"><form method="dialog"><h3 id="dlgTitle"></h3><div id="dlgBody"></div><div class="row"><button id="dlgNo" value="no">Reject</button><button id="dlgYes" value="ok" class="primary">Accept</button></div></form></dialog>
+<dialog id="scanDlg"><form method="dialog"><h3>Scan QR code</h3><video id="scanVideo" playsinline muted style="width:100%;border-radius:10px"></video><div class="row"><button>Cancel</button></div></form></dialog>
+<dialog id="setDlg"><form method="dialog"><h3>Settings</h3>
+<h4>General</h4><label>Device name <input id="sName" maxlength="40"></label>
+<label>Theme <select id="sTheme"><option value="system">System</option><option value="dark">Dark</option><option value="light">Light</option></select></label>
+<p class="hint">Language: English only in this version.</p>
+<h4>Connection</h4><label>Session timeout before pairing (minutes, 1–30) <input id="sTime" type="number" min="1" max="30"></label>
+<label><input type="checkbox" id="sReco"> Automatic reconnect (up to 4 tries)</label>
+<p class="hint">Local discovery is not available in web browsers. Devices per session: 2 (fixed).</p>
+<h4>Transfer</h4><label><input type="checkbox" id="sAsk"> Ask before receiving files</label><label><input type="checkbox" id="sAuto"> Auto-download received files</label>
+<label>Simultaneous transfers <select id="sSim"><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+<label><input type="checkbox" id="sSpeed"> Show speed</label><label><input type="checkbox" id="sEta"> Show ETA</label>
+<h4>Security</h4><label><input type="checkbox" id="sAppr"> Require device approval</label>
+<div class="row"><button type="button" id="btnAll">Disconnect All Devices</button><button type="button" id="btnReset">Reset Current Session</button></div>
+<h4>Appearance</h4><label><input type="checkbox" id="sAnim"> Animations</label><label><input type="checkbox" id="sSound"> Sound</label><label><input type="checkbox" id="sNote"> Browser notifications (when tab is hidden)</label>
+<h4>Privacy</h4><p class="hint">Files go directly between devices over WebRTC and are never stored on the signaling server. Session data is temporary and in memory. Transfer history is metadata only, stored in this browser. Permissions are controlled by your browser.</p>
+<h4>About</h4><p class="hint">YASIR SHARE 2.0.0 — local device-to-device sharing.</p>
+<p class="hint">Changes apply immediately.</p><div class="row"><button value="ok" class="primary">Done</button></div></form></dialog>
+<script src="app.js"></script></body></html>
