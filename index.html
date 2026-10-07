@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LAN SHARE</title>
+<meta name="description" content="Private peer-to-peer file sharing between your devices, powered by WebRTC.">
+<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<a class="skip" href="#connect" data-i18n="skip">Skip to content</a>
+
+<header class="nav glass">
+  <a class="brand" href="#home"><img src="assets/icons/favicon.svg" alt="" width="30" height="30"><span>LAN SHARE</span></a>
+  <button class="chip menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links" data-i18n-aria="menu">☰</button>
+  <nav id="links" class="links" data-i18n-aria="menu">
+    <a href="#home" data-i18n="nav_home">Home</a>
+    <a href="#transfer" data-i18n="nav_transfer">Transfer</a>
+    <a href="#devices" data-i18n="nav_devices">Devices</a>
+    <a href="#history" data-i18n="nav_history">History</a>
+    <a href="#how" data-i18n="nav_how">How it Works</a>
+  </nav>
+  <div class="tools">
+    <button class="chip" id="langBtn" type="button">دری</button>
+    <button class="chip" id="themeBtn" type="button" data-i18n-aria="theme">◐</button>
+    <a class="btn primary" href="#connect" data-i18n="nav_connect">Connect Device</a>
+  </div>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="hero-card glass">
+    <p class="badge" data-i18n="hero_badge">Direct device-to-device</p>
+    <h1><span data-i18n="h1a">Share</span><br><span data-i18n="h1b">without</span><br><span class="accent" data-i18n="h1c">limits.</span></h1>
+    <p class="lead" data-i18n="hero_p">Transfer files directly between your devices.</p>
+    <p class="muted" data-i18n="size_note">File size depends on your device, browser, storage and connection.</p>
+    <div class="row">
+      <a class="btn primary" href="#connect" data-mode="send" data-i18n="cta_send">Send Files</a>
+      <a class="btn ghost" href="#connect" data-mode="recv" data-i18n="cta_recv">Receive Files</a>
+    </div>
+  </div>
+  <img class="hero-art" src="assets/images/hero.svg" alt="" width="520" height="330">
+  <ul class="stats glass">
+    <li><b>P2P</b><span data-i18n="stat1">Direct transfer</span></li>
+    <li><b>0</b><span data-i18n="stat2">Cloud uploads</span></li>
+    <li><b>DTLS</b><span data-i18n="stat3">Encrypted channel</span></li>
+    <li><b>64–128 KB</b><span data-i18n="stat4">Adaptive chunks</span></li>
+  </ul>
+</section>
+
+<section id="connect" class="sec">
+  <h2 data-i18n="connect_title">Connect Device</h2>
+  <p class="muted" data-i18n="connect_sub">There is no server, so connection data is exchanged manually.</p>
+  <div id="unsupported" class="alert" role="alert" hidden></div>
+  <div class="glass pad">
+    <div class="row" role="group">
+      <button class="btn ghost" id="modeSend" aria-pressed="true" type="button" data-i18n="cta_send">Send Files</button>
+      <button class="btn ghost" id="modeRecv" aria-pressed="false" type="button" data-i18n="cta_recv">Receive Files</button>
+    </div>
+    <label class="check"><input type="checkbox" id="stun"> <span data-i18n="stun">Use a public STUN server (needed across different networks; it sees your IP)</span></label>
+    <p class="state"><i class="dot state-dot" data-state="idle"></i><span class="state-text" aria-live="polite"></span></p>
+
+    <div id="panelSend" class="panel">
+      <button class="btn primary" id="createOffer" type="button" data-i18n="s_create">Create connection</button>
+      <label for="offerOut" data-i18n="s_offer">Offer — send this to the other device</label>
+      <textarea id="offerOut" readonly rows="4"></textarea>
+      <div class="row"><button class="btn ghost" id="copyOffer" type="button" data-i18n="copy">Copy</button><button class="btn ghost" id="shareOffer" type="button" data-i18n="share" hidden>Share</button></div>
+      <label for="answerIn" data-i18n="s_answer">Paste the Answer from the other device</label>
+      <textarea id="answerIn" rows="4" spellcheck="false"></textarea>
+      <button class="btn primary" id="acceptAnswer" type="button" data-i18n="s_connect">Connect</button>
+    </div>
+
+    <div id="panelRecv" class="panel" hidden>
+      <label for="offerIn" data-i18n="r_offer">Paste the Offer from the sender</label>
+      <textarea id="offerIn" rows="4" spellcheck="false"></textarea>
+      <button class="btn primary" id="createAnswer" type="button" data-i18n="r_create">Create answer</button>
+      <label for="answerOut" data-i18n="r_answer">Answer — send this back to the sender</label>
+      <textarea id="answerOut" readonly rows="4"></textarea>
+      <button class="btn ghost" id="copyAnswer" type="button" data-i18n="copy">Copy</button>
+    </div>
+    <p class="muted small" data-i18n="qr_note">QR code is unavailable: the connection data is too large for a reliable QR without an external library. Use Copy or Share instead.</p>
+  </div>
+</section>
+
+<section id="transfer" class="sec">
+  <h2 data-i18n="tr_title">Transfer Center</h2>
+  <div class="glass pad">
+    <label class="drop" id="drop" for="picker"><b data-i18n="drop">Drop files here or tap to choose</b><span class="muted small" data-i18n="no_pause">Pause/resume is not available in this version.</span></label>
+    <input type="file" id="picker" multiple hidden>
+    <div class="row"><button class="btn primary" id="sendBtn" type="button" data-i18n="send_btn">Send queue</button></div>
+    <h3 data-i18n="queue_title">File transfer queue</h3>
+    <ul class="list" id="queue"></ul>
+    <div id="active" class="active" hidden>
+      <h3 data-i18n="active_title">Transfer</h3>
+      <p id="aName" class="name"></p>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="aBar"><i id="aFill"></i></div>
+      <p class="meta"><span id="aPct"></span><span id="aSpeed"></span><span id="aSize"></span><span id="aEta"></span></p>
+      <button class="btn ghost" id="aCancel" type="button" data-i18n="cancel">Cancel</button>
+    </div>
+    <h3 data-i18n="recv_title">Received files</h3>
+    <ul class="list" id="received"></ul>
+  </div>
+</section>
+
+<section id="devices" class="sec">
+  <h2 data-i18n="dev_title">Device Status</h2>
+  <div class="glass pad grid2">
+    <div><label for="devName" data-i18n="dev_name">Device name</label><input id="devName" maxlength="40"></div>
+    <div><p class="muted small" data-i18n="dev_status">Connection status</p><p class="state"><i class="dot state-dot" data-state="idle"></i><span class="state-text"></span></p></div>
+    <div><p class="muted small" data-i18n="dev_method">Connection method</p><p>WebRTC DataChannel</p></div>
+    <div><p class="muted small" data-i18n="dev_peer">Peer status</p><p id="peerText"></p></div>
+  </div>
+  <details class="glass pad diag" id="diag"><summary data-i18n="diag">Developer Diagnostics</summary><pre id="diagOut"></pre></details>
+</section>
+
+<section id="history" class="sec">
+  <h2 data-i18n="hist_title">Recent Transfers</h2>
+  <div class="glass pad"><ul class="list" id="histList"></ul><button class="btn ghost" id="clearHist" type="button" data-i18n="clear">Clear history</button></div>
+</section>
+
+<section class="sec">
+  <h2 data-i18n="feat_title">Features</h2>
+  <div class="grid3">
+    <article class="glass pad"><h3 data-i18n="f1">Direct Peer Transfer</h3><p class="muted" data-i18n="f1d">Files travel over a WebRTC data channel between the two devices.</p></article>
+    <article class="glass pad"><h3 data-i18n="f2">No Cloud Upload</h3><p class="muted" data-i18n="f2d">Nothing is uploaded to a server; received files are rebuilt in your browser.</p></article>
+    <article class="glass pad"><h3 data-i18n="f3">Large File Support</h3><p class="muted" data-i18n="f3d">Files are sent in chunks with backpressure. The receiver keeps data in memory, so the limit is set to 2 GB.</p></article>
+    <article class="glass pad"><h3 data-i18n="f4">Drag &amp; Drop</h3><p class="muted" data-i18n="f4d">Drop several files at once or use the file picker.</p></article>
+    <article class="glass pad"><h3 data-i18n="f5">Transfer Progress</h3><p class="muted" data-i18n="f5d">See percentage, speed and remaining time, and cancel at any point.</p></article>
+    <article class="glass pad"><h3 data-i18n="f6">Privacy First</h3><p class="muted" data-i18n="f6d">History stores only file names, sizes and dates on your device.</p></article>
+  </div>
+</section>
+
+<section class="sec">
+  <h2 data-i18n="sec_title">Security &amp; Privacy</h2>
+  <div class="glass pad"><p data-i18n="sec_text">Files are transferred directly between connected devices. WebRTC data channels are encrypted with DTLS. Incoming messages are validated and file names are sanitized. Only share connection data with someone you trust, and note that no software can promise absolute security.</p></div>
+</section>
+
+<section id="how" class="sec">
+  <h2 data-i18n="how_title">How it Works</h2>
+  <ol class="glass pad steps">
+    <li data-i18n="how1">The sender chooses “Send Files” and creates a connection to get an Offer.</li>
+    <li data-i18n="how2">Send the Offer to the receiver by chat, email or any channel you trust.</li>
+    <li data-i18n="how3">The receiver pastes it, creates an Answer and sends it back.</li>
+    <li data-i18n="how4">The sender pastes the Answer, connects, then adds files and sends.</li>
+  </ol>
+</section>
+
+<section class="sec">
+  <h2 data-i18n="faq_title">FAQ</h2>
+  <details class="glass pad"><summary data-i18n="q1">Why do I need to copy and paste?</summary><p class="muted" data-i18n="a1">Without a signaling server, connection setup requires manual offer/answer exchange.</p></details>
+  <details class="glass pad"><summary data-i18n="q2">Does it work on different networks?</summary><p class="muted" data-i18n="a2">Often yes with the STUN option, but strict firewalls may block it. Without a relay (TURN) server, some networks cannot connect.</p></details>
+  <details class="glass pad"><summary data-i18n="q3">Is there a file size limit?</summary><p class="muted" data-i18n="a3">This version rejects files over 2 GB because the receiver holds data in memory. Real limits also depend on your device and connection.</p></details>
+</section>
+</main>
+
+<footer class="foot glass">
+  <b>LAN SHARE</b>
+  <span data-i18n="foot_text">Private file sharing between your devices.</span>
+  <span><span data-i18n="built_by">Built by</span> SAYED YASIR · <a href="https://github.com/sayed-yasir" target="_blank" rel="noopener noreferrer">GitHub</a></span>
+</footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 330" role="img" aria-label="Phone, file and computer">
+<defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3de1ff"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient>
+<radialGradient id="r"><stop offset="0" stop-color="#3de1ff" stop-opacity=".45"/><stop offset="1" stop-color="#3de1ff" stop-opacity="0"/></radialGradient>
+<filter id="b"><feGaussianBlur stdDeviation="6"/></filter></defs>
+<circle cx="260" cy="165" r="150" fill="url(#r)"/>
+<g fill="none" stroke="url(#a)" stroke-width="3" stroke-linecap="round" stroke-dasharray="3 10"><path d="M112 165h72"/><path d="M336 165h72"/></g>
+<g fill="none" stroke="#3de1ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M176 156l10 9-10 9"/><path d="M344 156l-10 9 10 9"/></g>
+<rect x="30" y="85" width="80" height="150" rx="16" fill="#101a4a" stroke="url(#a)" stroke-width="3"/><rect x="40" y="100" width="60" height="112" rx="6" fill="#0a1236"/><circle cx="70" cy="224" r="4" fill="#3de1ff"/><rect x="52" y="116" width="36" height="6" rx="3" fill="#3b82f6" opacity=".6"/><rect x="52" y="130" width="24" height="6" rx="3" fill="#8b5cf6" opacity=".6"/>
+<rect x="400" y="95" width="100" height="75" rx="8" fill="#101a4a" stroke="url(#a)" stroke-width="3"/><rect x="408" y="103" width="84" height="55" rx="3" fill="#0a1236"/><path d="M432 170l-6 26h48l-6-26M418 196h72" fill="none" stroke="url(#a)" stroke-width="3" stroke-linecap="round"/><rect x="420" y="118" width="44" height="6" rx="3" fill="#3b82f6" opacity=".6"/><rect x="420" y="132" width="30" height="6" rx="3" fill="#8b5cf6" opacity=".6"/>
+<g transform="translate(260 165)"><rect x="-38" y="-52" width="76" height="104" rx="14" fill="url(#a)" opacity=".35" filter="url(#b)"/><path d="M-30-48h40l24 24v62a8 8 0 0 1-8 8h-48a8 8 0 0 1-8-8v-78a8 8 0 0 1 8-8z" fill="#101a4a" stroke="url(#a)" stroke-width="3" stroke-linejoin="round"/><path d="M10-48v18a6 6 0 0 0 6 6h18" fill="none" stroke="#3de1ff" stroke-width="3"/><path d="M-14 10l14-14 14 14M0-4v32" fill="none" stroke="#3de1ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>
