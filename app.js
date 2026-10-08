@@ -8,10 +8,10 @@ const S = { lang: store('ls_lang', 'en'), theme: store('ls_theme', 'dark'), pc: 
 
 /* ===== 2. I18N ===== */
 const I18N = {
-en: { v_title:'Verify the connection', v_help:'The same 6 digits must appear on the other device. If they differ, someone may be intercepting: disconnect.', v_ok:'They match', v_no:'They differ — disconnect', v_done:'Connection verified', e_verify:'Confirm the verification code on both devices first.', e_secure:'Verification needs a secure (HTTPS) page.', e_declined:'The other device declined the file.', incoming:'Incoming file', accept:'Accept', decline:'Decline', saved_disk:'Saved to disk', adv:'Advanced: TURN relay (optional)', adv_help:'Helps when a direct connection is impossible. Use your own TURN server; it relays encrypted data.', turn_url:'TURN URL (turn:host:3478)', turn_user:'Username', turn_pass:'Credential', code_label:'Your connection code (single use)', code_help:'On the other device choose Receive Files, then type this code or scan the QR. It connects automatically.', manual:'Manual connection (no relay)', r_code:'Enter the 12-digit code', r_join:'Connect', e_code:'Code not found. Check the 12 digits.', e_relay:'The relay is unreachable. Use Manual connection.', skip:'Skip to content', menu:'Menu', theme:'Toggle theme', nav_home:'Home', nav_transfer:'Transfer', nav_devices:'Devices', nav_history:'History', nav_how:'How it Works', nav_connect:'Connect Device',
+en: { st_preparing:'Preparing connection...', e_timeout:'Could not connect within 30 seconds. Use the same Wi-Fi (not a guest network or one with device isolation), keep STUN on for both devices, or add a TURN server. Open Developer Diagnostics for details.', v_title:'Verify the connection', v_help:'The same 6 digits must appear on the other device. If they differ, someone may be intercepting: disconnect.', v_ok:'They match', v_no:'They differ — disconnect', v_done:'Connection verified', e_verify:'Confirm the verification code on both devices first.', e_secure:'Verification needs a secure (HTTPS) page.', e_declined:'The other device declined the file.', incoming:'Incoming file', accept:'Accept', decline:'Decline', saved_disk:'Saved to disk', adv:'Advanced: TURN relay (optional)', adv_help:'Helps when a direct connection is impossible. Use your own TURN server; it relays encrypted data.', turn_url:'TURN URL (turn:host:3478)', turn_user:'Username', turn_pass:'Credential', code_label:'Your connection code (single use)', code_help:'On the other device choose Receive Files, then type this code or scan the QR. It connects automatically.', manual:'Manual connection (no relay)', r_code:'Enter the 12-digit code', r_join:'Connect', e_code:'Code not found. Check the 12 digits.', e_relay:'The relay is unreachable. Use Manual connection.', skip:'Skip to content', menu:'Menu', theme:'Toggle theme', nav_home:'Home', nav_transfer:'Transfer', nav_devices:'Devices', nav_history:'History', nav_how:'How it Works', nav_connect:'Connect Device',
  hero_badge:'Direct device-to-device', h1a:'Share', h1b:'without', h1c:'limits.', hero_p:'Transfer files directly between your devices.', size_note:'File size depends on your device, browser, storage and connection.',
  cta_send:'Send Files', cta_recv:'Receive Files', stat1:'Direct transfer', stat2:'Cloud uploads', stat3:'Encrypted channel', stat4:'Adaptive chunks',
- connect_title:'Connect Device', connect_sub:'Enter the 12-digit code or scan the QR. Only the small connection data passes through a free relay; files go directly between devices.', stun:'Use a public STUN server (needed across different networks; it sees your IP)',
+ connect_title:'Connect Device', connect_sub:'Enter the 12-digit code or scan the QR. Only the small connection data passes through a free relay; files go directly between devices.', stun:'Use public STUN servers (recommended: needed on most Wi-Fi and across networks; they see your IP)',
  s_create:'Create connection', s_offer:'Offer — send this to the other device', copy:'Copy', share:'Share', s_answer:'Paste the Answer from the other device', s_connect:'Connect',
  r_offer:'Paste the Offer from the sender', r_create:'Create answer', r_answer:'Answer — send this back to the sender',
  qr_note:'The code and QR use the free public relay ntfy.sh for a few seconds. If it is unreachable, open Manual connection below.',
@@ -31,10 +31,10 @@ en: { v_title:'Verify the connection', v_help:'The same 6 digits must appear on 
  foot_text:'Private file sharing between your devices.', built_by:'Built by',
  copied:'Copied', copy_fail:'Copy failed — select the text and copy it manually.', e_unsupported:'This browser does not support WebRTC, which LAN SHARE requires.', e_offer:'Invalid offer. Paste the complete text you received.', e_answer:'Invalid answer. Paste the complete text you received.',
  e_rejected:'A malformed message was rejected.', e_peer:'The other device disconnected.', e_interrupted:'Transfer interrupted.', e_notready:'Connect to another device first.', e_name:'File rejected: name is too long.', e_conn:'Connection failed. Try again or enable STUN.', e_empty:'Nothing to do yet — add files first.' },
-fa: { v_title:'تأیید اتصال', v_help:'همین ۶ رقم باید روی دستگاه دیگر هم نمایش داده شود. اگر فرق داشت، ممکن است کسی در میان باشد: اتصال را قطع کنید.', v_ok:'یکسان است', v_no:'فرق دارد — قطع کن', v_done:'اتصال تأیید شد', e_verify:'ابتدا کد تأیید را روی هر دو دستگاه تأیید کنید.', e_secure:'تأیید به صفحهٔ امن (HTTPS) نیاز دارد.', e_declined:'دستگاه مقابل فایل را نپذیرفت.', incoming:'فایل ورودی', accept:'پذیرفتن', decline:'رد کردن', saved_disk:'روی دیسک ذخیره شد', adv:'پیشرفته: رلهٔ TURN (اختیاری)', adv_help:'وقتی اتصال مستقیم ممکن نیست کمک می‌کند. سرور TURN خودتان را بگذارید؛ داده‌های رمزنگاری‌شده را رله می‌کند.', turn_url:'نشانی TURN (turn:host:3478)', turn_user:'نام کاربری', turn_pass:'گذرواژه', code_label:'کد اتصال شما (یک‌بارمصرف)', code_help:'در دستگاه دیگر «دریافت فایل» را بزنید، سپس این کد را بنویسید یا QR را اسکن کنید. به‌طور خودکار وصل می‌شود.', manual:'اتصال دستی (بدون رله)', r_code:'کد ۱۲ رقمی را وارد کنید', r_join:'اتصال', e_code:'کد پیدا نشد. ۱۲ رقم را بررسی کنید.', e_relay:'رله در دسترس نیست. از اتصال دستی استفاده کنید.', skip:'رفتن به محتوا', menu:'منو', theme:'تغییر تم', nav_home:'خانه', nav_transfer:'انتقال', nav_devices:'دستگاه‌ها', nav_history:'تاریخچه', nav_how:'چگونه کار می‌کند', nav_connect:'اتصال دستگاه',
+fa: { st_preparing:'در حال آماده‌سازی اتصال...', e_timeout:'اتصال در ۳۰ ثانیه برقرار نشد. از یک Wi-Fi مشترک استفاده کنید (نه شبکهٔ مهمان یا شبکه‌ای که دستگاه‌ها را جدا می‌کند)، STUN را روی هر دو دستگاه روشن نگه دارید یا سرور TURN اضافه کنید. برای جزئیات، تشخیص توسعه‌دهنده را باز کنید.', v_title:'تأیید اتصال', v_help:'همین ۶ رقم باید روی دستگاه دیگر هم نمایش داده شود. اگر فرق داشت، ممکن است کسی در میان باشد: اتصال را قطع کنید.', v_ok:'یکسان است', v_no:'فرق دارد — قطع کن', v_done:'اتصال تأیید شد', e_verify:'ابتدا کد تأیید را روی هر دو دستگاه تأیید کنید.', e_secure:'تأیید به صفحهٔ امن (HTTPS) نیاز دارد.', e_declined:'دستگاه مقابل فایل را نپذیرفت.', incoming:'فایل ورودی', accept:'پذیرفتن', decline:'رد کردن', saved_disk:'روی دیسک ذخیره شد', adv:'پیشرفته: رلهٔ TURN (اختیاری)', adv_help:'وقتی اتصال مستقیم ممکن نیست کمک می‌کند. سرور TURN خودتان را بگذارید؛ داده‌های رمزنگاری‌شده را رله می‌کند.', turn_url:'نشانی TURN (turn:host:3478)', turn_user:'نام کاربری', turn_pass:'گذرواژه', code_label:'کد اتصال شما (یک‌بارمصرف)', code_help:'در دستگاه دیگر «دریافت فایل» را بزنید، سپس این کد را بنویسید یا QR را اسکن کنید. به‌طور خودکار وصل می‌شود.', manual:'اتصال دستی (بدون رله)', r_code:'کد ۱۲ رقمی را وارد کنید', r_join:'اتصال', e_code:'کد پیدا نشد. ۱۲ رقم را بررسی کنید.', e_relay:'رله در دسترس نیست. از اتصال دستی استفاده کنید.', skip:'رفتن به محتوا', menu:'منو', theme:'تغییر تم', nav_home:'خانه', nav_transfer:'انتقال', nav_devices:'دستگاه‌ها', nav_history:'تاریخچه', nav_how:'چگونه کار می‌کند', nav_connect:'اتصال دستگاه',
  hero_badge:'مستقیم از دستگاه به دستگاه', h1a:'شریک کنید', h1b:'بدون', h1c:'محدودیت.', hero_p:'فایل‌ها را مستقیماً بین دستگاه‌های خود انتقال دهید.', size_note:'اندازهٔ فایل به دستگاه، مرورگر، حافظه و اتصال شما بستگی دارد.',
  cta_send:'ارسال فایل', cta_recv:'دریافت فایل', stat1:'انتقال مستقیم', stat2:'آپلود به ابر', stat3:'کانال رمزنگاری‌شده', stat4:'بخش‌های تطبیقی',
- connect_title:'اتصال دستگاه', connect_sub:'کد ۱۲ رقمی را وارد کنید یا QR را اسکن کنید. فقط اطلاعات کوچک اتصال از یک رله رایگان می‌گذرد؛ فایل‌ها مستقیماً بین دستگاه‌ها می‌روند.', stun:'استفاده از سرور عمومی STUN (برای شبکه‌های متفاوت لازم است؛ IP شما را می‌بیند)',
+ connect_title:'اتصال دستگاه', connect_sub:'کد ۱۲ رقمی را وارد کنید یا QR را اسکن کنید. فقط اطلاعات کوچک اتصال از یک رله رایگان می‌گذرد؛ فایل‌ها مستقیماً بین دستگاه‌ها می‌روند.', stun:'استفاده از سرورهای عمومی STUN (توصیه می‌شود: در بیشتر شبکه‌های Wi-Fi و بین شبکه‌ها لازم است؛ IP شما را می‌بینند)',
  s_create:'ایجاد اتصال', s_offer:'پیشنهاد (Offer) — این را به دستگاه دیگر بفرستید', copy:'کپی', share:'اشتراک‌گذاری', s_answer:'پاسخ (Answer) دستگاه دیگر را اینجا بچسبانید', s_connect:'اتصال',
  r_offer:'پیشنهاد (Offer) فرستنده را اینجا بچسبانید', r_create:'ایجاد پاسخ', r_answer:'پاسخ (Answer) — این را به فرستنده برگردانید',
  qr_note:'کد و QR برای چند ثانیه از رلهٔ عمومی رایگان ntfy.sh استفاده می‌کنند. اگر در دسترس نبود، «اتصال دستی» را باز کنید.',
@@ -142,18 +142,24 @@ function renderActive() {
   const q = document.querySelector('[data-pct="' + a.item.id + '"]'); if (q) q.textContent = pctOf(done, a.size);
   updateDiag();
 }
+function cands(d) { /* candidate types in an SDP; "mdns" = hidden local address that some Wi-Fi networks cannot resolve */
+  if (!d) return '-';
+  const n = {}; for (const m of d.sdp.matchAll(/ typ (\w+)/g)) n[m[1]] = (n[m[1]] || 0) + 1;
+  const mdns = (d.sdp.match(/ [0-9a-f-]+\.local /g) || []).length;
+  return Object.entries(n).map(([k, v]) => k + 'x' + v).join(' ') + (mdns ? ' mdns' + 'x' + mdns : '') || 'none';
+}
 function updateDiag() {
   if (!$('diag').open) return;
   const pc = S.pc, dc = S.dc;
   $('diagOut').textContent = ['connection: ' + (pc ? pc.connectionState : '-'), 'ice: ' + (pc ? pc.iceConnectionState : '-'), 'signaling: ' + (pc ? pc.signalingState : '-'),
-    'datachannel: ' + (dc ? dc.readyState : '-'), 'bufferedAmount: ' + (dc ? dc.bufferedAmount : 0), 'speed: ' + fmtSize(S.speed) + '/s', 'last error: ' + S.err].join('\n');
+    'datachannel: ' + (dc ? dc.readyState : '-'), 'gathering: ' + (pc ? pc.iceGatheringState : '-'), 'local candidates: ' + cands(pc && pc.localDescription), 'remote candidates: ' + cands(pc && pc.remoteDescription), 'bufferedAmount: ' + (dc ? dc.bufferedAmount : 0), 'speed: ' + fmtSize(S.speed) + '/s', 'last error: ' + S.err].join('\n');
 }
 
 /* ===== 4. WEBRTC ===== */
 const ready = () => S.dc && S.dc.readyState === 'open';
 function iceServers() {
   const l = [], url = $('turnUrl').value.trim();
-  if ($('stun').checked) l.push({ urls: 'stun:stun.l.google.com:19302' });
+  if ($('stun').checked) l.push({ urls: ['stun:stun.l.google.com:19302', 'stun:stun.cloudflare.com:3478'] });
   if (/^turns?:/.test(url)) l.push({ urls: url, username: $('turnUser').value, credential: $('turnPass').value });
   return l;
 }
@@ -162,7 +168,7 @@ function newPeer() {
   const pc = new RTCPeerConnection({ iceServers: iceServers() });
   pc.onconnectionstatechange = () => {
     const c = pc.connectionState;
-    if (c === 'connecting') setState('connecting');
+    if (c === 'connecting') { setState('connecting'); if (!S.timer) S.timer = setTimeout(() => { S.timer = null; if (S.state !== 'connected') { setState('failed'); toast('e_timeout', true); } }, 30000); }
     else if (c === 'failed') { setState('failed'); toast('e_conn', true); }
     else if (c === 'disconnected' || c === 'closed') onPeerGone();
     updateDiag();
@@ -172,7 +178,7 @@ function newPeer() {
 }
 function bindChannel(dc) {
   dc.binaryType = 'arraybuffer'; dc.bufferedAmountLowThreshold = LOW; S.dc = dc;
-  dc.onopen = () => { closeRelay(); setState('connected'); sendCtl({ type: 'hello', name: $('devName').value.trim().slice(0, 40) || 'Device' }); startVerify(); };
+  dc.onopen = () => { clearTimeout(S.timer); S.timer = null; closeRelay(); setState('connected'); sendCtl({ type: 'hello', name: $('devName').value.trim().slice(0, 40) || 'Device' }); startVerify(); };
   dc.onclose = onPeerGone;
   dc.onerror = () => { S.err = 'datachannel error'; updateDiag(); };
   dc.onmessage = onMessage;
@@ -196,6 +202,7 @@ async function startVerify() {
   } catch (e) { S.err = String(e); toast('e_secure', true); }
 }
 function closePeer() {
+  clearTimeout(S.timer); S.timer = null;
   const { pc, dc } = S; S.pc = S.dc = null;
   if (dc) { dc.onclose = null; try { dc.close(); } catch { /* already closed */ } }
   if (pc) { pc.onconnectionstatechange = null; try { pc.close(); } catch { /* already closed */ } }
@@ -227,13 +234,13 @@ async function decode(text, type) {
   return null;
 }
 async function createOffer() {
-  closeRelay(); $('codeBox').hidden = true; const b = $('createOffer'); b.disabled = true; setState('waiting'); $('offerOut').value = '';
+  closeRelay(); $('codeBox').hidden = true; const b = $('createOffer'); b.disabled = true; setState('preparing'); $('offerOut').value = '';
   try {
     const pc = newPeer(); bindChannel(pc.createDataChannel('lan-share'));
     await pc.setLocalDescription(await pc.createOffer()); await waitIce(pc);
     $('offerOut').value = await encode(pc.localDescription);
-    try { const code = await freshCode(); await relayPost(topic(code, 'o'), $('offerOut').value); showCode(code); listenAnswer(code); }
-    catch (e) { S.err = String(e); toast('e_relay', true); } /* manual connection still works */
+    try { const code = await freshCode(); await relayPost(topic(code, 'o'), $('offerOut').value); showCode(code); listenAnswer(code); setState('waiting'); }
+    catch (e) { S.err = String(e); setState('waiting'); toast('e_relay', true); } /* manual connection still works */
   } catch (e) { S.err = String(e); setState('failed'); toast('e_conn', true); }
   b.disabled = false;
 }

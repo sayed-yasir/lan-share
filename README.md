@@ -34,7 +34,7 @@ A current Chrome, Edge, Firefox or Safari with WebRTC, Blob and File APIs.
 ## Known limitations
 - Manual signaling: users must copy/paste Offer and Answer.
 - Quick connect (12-digit code / QR) passes the small Offer/Answer through the free public relay ntfy.sh; files never touch it. The relay is a third-party dependency, and manual connection works without it.
-- No TURN relay: strict NATs/firewalls may block connections across networks (optional public STUN is off by default).
+- No TURN relay: strict NATs/firewalls may block connections across networks (public STUN is on by default; it sees IP addresses but never files).
 - No app-imposed size limit. Desktop Chrome/Edge stream received files straight to disk (File System Access API). Other browsers (including iOS and most Android) keep data in memory (32 MB Blob segments) until saved, so very large files depend on device memory.
 - Backgrounding the tab or locking a phone can still interrupt a transfer; a screen wake lock is requested where supported. Interrupted transfers restart from zero.
 - TURN is optional and user-supplied; without it some networks cannot connect.
